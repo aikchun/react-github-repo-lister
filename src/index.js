@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@material-ui/styles";
-import App from "./components/App";
+import App from "./containers/App";
 import reducers from './reducers';
 import theme from "./theme";
 import "./index.css";
