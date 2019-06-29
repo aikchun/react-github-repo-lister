@@ -61,7 +61,7 @@ const App = ({ fetchUserRepos, isFetching, error, repos, orgs }) => {
     return (
       <List subheader={<ListSubheader>Repositories</ListSubheader>}>
         {repos.map(repo => (
-          <ListItem>
+          <ListItem button component="a" href={repo.html_url} target="_blank">
             <ListItemIcon>
               <GithubIcon />
             </ListItemIcon>
@@ -76,7 +76,12 @@ const App = ({ fetchUserRepos, isFetching, error, repos, orgs }) => {
     return (
       <List subheader={<ListSubheader>Organizations</ListSubheader>}>
         {orgs.map(org => (
-          <ListItem>
+          <ListItem
+            button
+            component="a"
+            target="_blank"
+            href={`https://github.com/${org.login}`}
+          >
             <ListItemIcon>
               <GithubIcon />
             </ListItemIcon>
