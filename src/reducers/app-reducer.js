@@ -11,8 +11,8 @@ export default (state = {}, action) => {
     case FETCH_USER_REPOS_AND_ORGANIZATIONS_SUCCESS:
       return {
         isFetching: false,
-        repos: action.data.repos,
-        organizations: action.data.organizations
+        repos: action.repos,
+        orgs: action.orgs,
       };
     case FETCH_USER_REPOS_AND_ORGANIZATIONS_FAILURE:
       return {

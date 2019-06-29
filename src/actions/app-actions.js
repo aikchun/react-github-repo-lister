@@ -4,24 +4,23 @@ import {
   FETCH_USER_REPOS_AND_ORGANIZATIONS_FAILURE
 } from "./types";
 
-import api from "../utils/api";
+import api, { getError } from "../utils/api";
 
 export const fetchUserReposAndOrganizations = username => async dispatch => {
   dispatch({ type: FETCH_USER_REPOS_AND_ORGANIZATIONS_REQUEST });
-  try {
-    const response = await api.getUserRepos(username);
-    if (response.ok) {
-      dispatch({
-        type: FETCH_USER_REPOS_AND_ORGANIZATIONS_SUCCESS,
-        data: response.data
-      });
-    } else {
-      dispatch({
-        type: FETCH_USER_REPOS_AND_ORGANIZATIONS_FAILURE,
-        error: response.error
-      });
-    }
-  } catch (e) {
-    // do nothing just yet.
+  const reposResponse = await api.getUserRepos(username);
+  const orgsResponse = await api.getUserOrgs(username);
+  if (reposResponse.ok && orgsResponse.ok) {
+    dispatch({
+      type: FETCH_USER_REPOS_AND_ORGANIZATIONS_SUCCESS,
+      repos: reposResponse.data,
+      orgs: orgsResponse.data
+    });
+  } else {
+    const errorResponse = !reposResponse.ok ? reposResponse : orgsResponse;
+    dispatch({
+      type: FETCH_USER_REPOS_AND_ORGANIZATIONS_FAILURE,
+      error: getError(errorResponse)
+    });
   }
 };

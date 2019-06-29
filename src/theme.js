@@ -16,6 +16,16 @@ const theme = createMuiTheme({
     background: {
       default: "#E4E4E4"
     }
+  },
+  overrides: {
+    MuiTypography: {
+      colorPrimary: {
+        color: "#687C8F"
+      },
+      colorSecondary: {
+        color: "#8D8D8D"
+      }
+    }
   }
 });
 
