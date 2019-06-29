@@ -19,6 +19,17 @@ const useStyles = makeStyles(theme => {
       [desktopBreakpoint]: {
         paddingTop: "64px"
       }
+    },
+    content: {
+      width: "100%",
+      maxWidth: "395px",
+      marginTop: theme.spacing(2),
+      [desktopBreakpoint]: {
+        maxWidth: "504px"
+      }
+    },
+    textFieldTitle: {
+      marginBottom: theme.spacing(1)
     }
   };
 });
@@ -32,30 +43,27 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className={classes.root}>
       <AppBar>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            Github Repo Lister
           </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
-      <TextField
-        label="Username"
-        name="username"
-        variant="outlined"
-        onChange={handleInputChange}
-        value={searchQuery}
-      />
+      <div className={classes.content}>
+        <Typography variant="h6" className={classes.textFieldTitle}>
+          Enter Github Username
+        </Typography>
+        <TextField
+          label="Username"
+          name="username"
+          variant="outlined"
+          onChange={handleInputChange}
+          value={searchQuery}
+          fullWidth
+        />
+      </div>
     </div>
   );
 };
