@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
