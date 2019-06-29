@@ -22,6 +22,6 @@ export const fetchUserReposAndOrganizations = username => async dispatch => {
       });
     }
   } catch (e) {
-    console.log("e", e);
+    // do nothing just yet.
   }
 };

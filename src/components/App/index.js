@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { useState, useEffect } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -6,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { fetchUserReposAndOrganizations } from "../../actions/app-actions";
 
@@ -35,7 +37,7 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-const App = ({ fetchUserRepos }) => {
+const App = ({ fetchUserRepos, isFetching }) => {
   const classes = useStyles();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -65,18 +67,26 @@ const App = ({ fetchUserRepos }) => {
           value={searchQuery}
           fullWidth
         />
+        <div className={classes.repo}>
+          {isFetching ? <CircularProgress color="primary" /> : null}
+        </div>
       </div>
     </div>
   );
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchUserRepos: username => {
+  fetchUserRepos: _.debounce(username => {
     dispatch(fetchUserReposAndOrganizations(username));
-  }
+  }, 500)
 });
+
+const mapStateToProps = state => ({
+  isFetching: state.app.isFetching
+});
+
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 );
 export default compose(withConnect)(App);
