@@ -24,6 +24,9 @@ const theme = createMuiTheme({
       },
       colorSecondary: {
         color: "#8D8D8D"
+      },
+      colorError: {
+        color: "#d50000"
       }
     }
   }

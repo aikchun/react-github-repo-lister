@@ -42,7 +42,8 @@ const useStyles = makeStyles(theme => {
     },
     repos: {
       marginTop: theme.spacing(2),
-      display: "flex"
+      display: "flex",
+      justifyContent: "center"
     }
   };
 });
@@ -112,7 +113,11 @@ const App = ({ fetchUserRepos, isFetching, error, repos, orgs }) => {
         />
         <div className={classes.repos}>
           {isFetching ? <CircularProgress color="primary" /> : null}
-          {error && <Typography variant="error">{error.message}</Typography>}
+          {error && (
+            <Typography variant="h6" color="error">
+              {error.message}
+            </Typography>
+          )}
           {repos && renderRepos()}
           {orgs && renderOrgs()}
         </div>
