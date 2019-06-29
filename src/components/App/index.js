@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-const App = ({ fetchUserRepos, isFetching, error, repos, orgs }) => {
+export const App = ({ fetchUserRepos, isFetching, error, repos, orgs }) => {
   const classes = useStyles();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -61,7 +61,13 @@ const App = ({ fetchUserRepos, isFetching, error, repos, orgs }) => {
     return (
       <List subheader={<ListSubheader>Repositories</ListSubheader>}>
         {repos.map(repo => (
-          <ListItem button component="a" href={repo.html_url} target="_blank">
+          <ListItem
+            button
+            component="a"
+            href={repo.html_url}
+            target="_blank"
+            key={repo.name}
+          >
             <ListItemIcon>
               <GithubIcon />
             </ListItemIcon>
@@ -81,6 +87,7 @@ const App = ({ fetchUserRepos, isFetching, error, repos, orgs }) => {
             component="a"
             target="_blank"
             href={`https://github.com/${org.login}`}
+            key={org.login}
           >
             <ListItemIcon>
               <GithubIcon />
