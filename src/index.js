@@ -1,15 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./components/App";
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import reduxThunk from 'redux-thunk';
 import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@material-ui/styles";
+import App from "./components/App";
+import reducers from './reducers';
 import theme from "./theme";
+import "./index.css";
+
+
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(reducers);
 
 ReactDOM.render(
+  <Provider store={store}>
   <ThemeProvider theme={theme}>
     <App />
-  </ThemeProvider>,
+  </ThemeProvider>
+  </Provider >,
   document.getElementById("root")
 );
 
